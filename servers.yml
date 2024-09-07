@@ -4,61 +4,25 @@
   become: true
   tasks:
 
-
-  - name: update repository index
+  - name: update repo & install apache2 and utility packages
     apt:
+      name: 
+        - apache2
+        - libapache2-mod-php
+        - net-tools
+        - nano
+        - lsof
+      state: latest
       update_cache: yes
     when: ansible_distribution in ["Debian", "Ubuntu"]
 
-  - name: install apache2 package
-    apt:
-      name: apache2
-      state: latest
-    when: ansible_distribution in ["Debian", "Ubuntu"]
-
-  - name: install php support for package
-    apt:
-      name: libapache2-mod-php 
-      state: latest
-    when: ansible_distribution in ["Debian", "Ubuntu"]
-
-  - name: install net-tools package
-    apt:
-      name: net-tools
-      state: latest
-    when: ansible_distribution in ["Debian", "Ubuntu"]
-
-  - name: install python3-update-manager package
-    apt:
-      name: python3-update-manager
-      state: latest
-    when: ansible_distribution == "Ubuntu"
-
-  - name: install update-manager-core package
-    apt:
-      name: update-manager-core
-      state: latest
-    when: ansible_distribution == "Ubuntu"
-
-  - name: update repository index
+  - name: update repo & install nginx and utility packages
     pacman:
+      name: 
+        - nginx
+        - php
+        - nano
+        - net-tools
+      state: latest
       update_cache: yes
-    when: ansible_distribution == "Archlinux"
-
-  - name: install nginx package
-    pacman:
-      name: nginx
-      state: latest
-    when: ansible_distribution == "Archlinux"
-
-  - name: install php support for package
-    pacman:
-      name: php 
-      state: latest
-    when: ansible_distribution == "Archlinux"
-
-  - name: install net-tools package
-    pacman:
-      name: net-tools
-      state: latest
     when: ansible_distribution == "Archlinux"
