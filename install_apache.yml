@@ -23,3 +23,14 @@
     apt:
       name: net-tools
       state: latest
+
+  - name: install python3-update-manager package
+    apt:
+      name: python3-update-manager
+      state: latest
+
+  - name: install update-manager-core package
+    apt:
+      name: update-manager-core
+      state: latest
+
