@@ -1,0 +1,25 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+
+  - name: update repository index
+    apt:
+      update_cache: yes
+
+  - name: install apache2 package
+    apt:
+      name: apache2
+      state: absent
+
+  - name: install php support for package
+    apt:
+      name: libapache2-mod-php 
+      state: absent
+
+  - name: install net-tools package
+    apt:
+      name: net-tools
+      state: latest
