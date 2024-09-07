@@ -1,3 +1,10 @@
+[Ubuntu]
 ubsrv-1
 ubsrv-2
 ubsrv-3
+
+[Debian]
+fog-server
+
+[Archlinux]
+192.168.60.14
