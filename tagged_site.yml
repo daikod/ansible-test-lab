@@ -1,0 +1,59 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: install updates (Archlinux)
+    tags: always
+    pacman:
+      update_cache: yes
+    when: ansible_distribution == "Archlinux"
+
+  - name: install updates (Debian and Unbuntu)
+    tags: always
+    apt:
+      update_cache: yes
+    when: ansible_distribution in ["Debian", "Ubuntu"]
+
+- hosts: web_servers
+  become: true
+  tasks:
+
+  - name: install apache2 and utility packages
+    tags: apache,apache2,ubuntu
+    apt:
+      name: 
+        - apache2
+        - libapache2-mod-php
+        - net-tools
+        - nano
+        - lsof
+      state: latest
+    when: ansible_distribution == "Ubuntu"
+
+- hosts: db_servers
+  become: true
+  tasks:
+
+  - name: install mariadb packages (Ubuntu)
+    tags: ubuntu,db,mariadb
+    apt:
+      name:
+        - mariadb-server
+      state: latest
+    when: ansible_distribution == "Ubuntu"
+
+
+- hosts: file_servers
+  become: true
+  tasks:
+
+  - name: install samba and filezilla packages
+    tags: samba
+    apt:
+      name:
+        - samba
+        - filezilla
+      state: latest
+    when: ansible_distribution == "Ubuntu"
