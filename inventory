@@ -1,10 +1,10 @@
 [Ubuntu]
-ubsrv-1
-ubsrv-2
-ubsrv-3
+ubsrv-1 apache_package=apache2 php_package=libapache2-mod-php
+ubsrv-2 apache_package=apache2 php_package=libapache2-mod-php
+ubsrv-3 apache_package=apache2 php_package=libapache2-mod-php
 
 [Debian]
-fog-server
+fog-server apache_package=apache2 php_package=libapache2-mod-php
 
 [Archlinux]
-192.168.60.14
+192.168.60.14 apache_package=nginx php_package=php
