@@ -1,0 +1,16 @@
+  - name: install samba and filezilla packages
+    tags: samba
+    apt:
+      name:
+        - samba
+        - filezilla
+      state: latest
+    when: ansible_distribution == "Ubuntu"
+
+  - name: start samba file server
+    tags: samba
+    service:
+      name: smbd
+      state: started
+      enabled: yes
+    when: ansible_distribution == "Ubuntu"

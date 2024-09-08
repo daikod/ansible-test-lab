@@ -4,28 +4,30 @@
   become: true
   pre_tasks:
 
-  - name: install updates (Archlinux)
+  - name: upate repo cache (Archlinux)
     tags: always
     pacman:
       update_cache: yes
+    changed_when: false
     when: ansible_distribution == "Archlinux"
 
-  - name: install updates (Debian and Unbuntu)
+  - name: update repo cache (Debian and Unbuntu)
     tags: always
     apt:
-      upgrade: dist
       update_cache: yes
+    changed_when: false
     when: ansible_distribution in ["Debian", "Ubuntu"]
 
 - hosts: all
   become: true
   tasks:
 
-  - name: create user simone
+
+  - name: add ssh key for simone
     tags: always
-    user:
-      name: simone
-      groups: root
+    authorized_key:
+      user: simone
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPQIwTnxh8/eiz4wb/C1Op6FLYW2EJ4aQuha2S/8aIXH ansible"
 
 
 - hosts: workstations
