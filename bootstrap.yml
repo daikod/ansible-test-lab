@@ -1,0 +1,44 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: install updates (Archlinux)
+    tags: always
+    pacman:
+      update_cache: yes
+    when: ansible_distribution == "Archlinux"
+
+  - name: install updates (Debian and Unbuntu)
+    tags: always
+    apt:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution in ["Debian", "Ubuntu"]
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: create user simone
+    tags: always
+    user:
+      name: simone
+      groups: root
+
+  - name: add ssh key for simone
+    tags: always
+    authorized_key:
+      user: simone
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPQIwTnxh8/eiz4wb/C1Op6FLYW2EJ4aQuha2S/8aIXH ansible"
+
+  - name: add sudoers file for simone
+    tags: always
+    copy:
+      src: sudoers_simone
+      dest: /etc/sudoers.d/simone
+      owner: root
+      group: root
+      mode: 0440
+
