@@ -11,4 +11,7 @@ ubsrv-3
 fog-server 
 
 [Archlinux]
-192.168.60.14 
+192.168.60.14
+
+[workstations]
+192.168.60.15
