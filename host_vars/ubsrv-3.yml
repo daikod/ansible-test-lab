@@ -1,5 +1,6 @@
 samba_package_name: samba
 samba_service: smbd
-
 filezilla_package_name: filezilla
 filezilla_service: filezilla
+ssh_users: "dike simone"
+ssh_template_file: sshd_config_ubuntu.j2

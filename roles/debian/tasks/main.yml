@@ -1,0 +1,10 @@
+- name: install utilties on fog_server
+  tags: utilities
+  package: 
+    name: 
+      - unzip
+      - nano
+      - sudo
+      - net-tools
+      - lsof
+ 

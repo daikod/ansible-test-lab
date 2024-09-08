@@ -44,3 +44,14 @@
   become: true
   roles:
     - file_servers
+
+- hosts: Debian
+  become: true
+  roles:
+    - debian
+
+- hosts: Archlinux
+  become: true
+  roles:
+    - archlinux
+

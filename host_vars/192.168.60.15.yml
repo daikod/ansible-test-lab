@@ -1,0 +1,9 @@
+terraform_package_name: terraform
+terraform_service: terraform
+unzip_package_name: unzip
+net-tools_package_name: net-tools
+sudo_package_name: sudo
+nano_package_name: nano
+lsof_package_name: lsof
+ssh_users: "dike simone"
+ssh_template_file: sshd_config_debian.j2
