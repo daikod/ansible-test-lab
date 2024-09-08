@@ -57,6 +57,30 @@
       state: latest
     when: ansible_distribution == "Ubuntu"
 
+  - name: start apache web_server
+    tags: apache,apache2,ubuntu
+    service:
+      name: apache2
+      state: started
+      enabled: yes
+    when: ansible_distribution == "Ubuntu"
+
+  - name: change e-mail address for admin
+    tags: apache,apache2,ubuntu
+    lineinfile:
+      path: /etc/apache2/apache2.conf
+      regexp: '^ServerAdmin'
+      line: ServerAdmin dike@medicitng.com
+    when: ansible_distribution == "Ubuntu"
+    register: apache2
+
+  - name: restart apache2 (Ubuntu)
+    tags: apache,apache2,ubuntu
+    service:
+      name: apache2
+      state: restarted
+    when: apache2.changed
+
   - name: copy default htm file for site
     tags: apache,apache2,ubuntu
     copy:
@@ -78,6 +102,14 @@
       state: latest
     when: ansible_distribution == "Ubuntu"
 
+  - name: start and enable mariadb server
+    tags: ubuntu,db,mariadb
+    service:
+      name: mariadb
+      state: started
+      enabled: yes
+    when: ansible_distribution == "Ubuntu"
+
 
 - hosts: file_servers
   become: true
@@ -90,4 +122,12 @@
         - samba
         - filezilla
       state: latest
+    when: ansible_distribution == "Ubuntu"
+
+  - name: start samba file server
+    tags: samba
+    service:
+      name: smbd
+      state: started
+      enabled: yes
     when: ansible_distribution == "Ubuntu"
